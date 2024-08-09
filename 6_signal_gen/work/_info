@@ -1,0 +1,89 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Elvis/OneDrive/Documentos/_pld/julho/BACKUP 04-08-2024/Prova 2 Maquina de Estados/signal_gen
+Esignal_gen
+Z1 w1722907020
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8signal_gen.vhd
+Z6 Fsignal_gen.vhd
+l0
+L5
+VTWMd3<]Wi1[hQICDhg<7G2
+!s100 gYmFgWGjAhS35C[Pn5OZf1
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1722907113
+!i10b 1
+Z9 !s108 1722907113.000000
+Z10 !s90 -reportprogress|300|signal_gen.vhd|signal_gen_tb.vhd|
+Z11 !s107 signal_gen_tb.vhd|signal_gen.vhd|
+!i113 1
+Z12 tExplicit 1 CvgOpt 0
+Afsm
+R2
+R3
+R4
+Z13 DEx4 work 10 signal_gen 0 22 TWMd3<]Wi1[hQICDhg<7G2
+l19
+L12
+Z14 VH_]]]7EXmj`7?^>ZBcfC@0
+Z15 !s100 G<CX1>HmEfEgGGEQ^hPa=1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+Esignal_gen_tb
+Z16 w1722907111
+R2
+R3
+R4
+R0
+Z17 8signal_gen_tb.vhd
+Z18 Fsignal_gen_tb.vhd
+l0
+L5
+V9WUhiP>Bg6k4BAa`TDo>`1
+!s100 2@7aPbV=2g@8T254dENjF0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+Atb
+R13
+R2
+R3
+R4
+Z19 DEx4 work 13 signal_gen_tb 0 22 9WUhiP>Bg6k4BAa`TDo>`1
+l13
+L8
+VQIc3VcULoTOc8fmiL4[1^0
+!s100 @]dPj]i_nlo19H9l67<J_0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12

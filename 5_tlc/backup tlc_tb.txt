@@ -1,0 +1,103 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY tlc_tb IS
+END ENTITY tlc_tb;
+
+ARCHITECTURE tb OF tlc_tb IS
+
+    -- Constants
+    CONSTANT clk_period : time := 10 ns;
+    CONSTANT timeMAX    : INTEGER := 27;
+    CONSTANT timeRG     : INTEGER := 18;
+    CONSTANT timeRY     : INTEGER := 3;
+    CONSTANT timeGR     : INTEGER := 27;
+    CONSTANT timeYR     : INTEGER := 3;
+    CONSTANT timeTEST   : INTEGER := 27;
+
+    -- Signals
+    SIGNAL clk   : std_logic := '0';
+    SIGNAL stby  : std_logic;
+    SIGNAL test  : std_logic;
+    SIGNAL r1    : std_logic;
+    SIGNAL y1    : std_logic;
+    SIGNAL g1    : std_logic;
+    SIGNAL r2    : std_logic;
+    SIGNAL y2    : std_logic;
+    SIGNAL g2    : std_logic;
+    SIGNAL count : INTEGER := 0; -- Counter signal for testbench
+
+BEGIN
+
+    -- Instantiate the Unit Under Test (UUT)
+    dut: ENTITY work.tlc
+        PORT MAP (
+            clk    => clk,
+            stby   => stby,
+            test   => test,
+            r1     => r1,
+            r2     => r2,
+            y1     => y1,
+            y2     => y2,
+            g1     => g1,
+            g2     => g2,
+            timeRG => timeRG,
+            timeRY => timeRY,
+            timeGR => timeGR,
+            timeYR => timeYR,
+            timeTEST => timeTEST
+        );
+
+    -- Clock generation process
+    clk_process : PROCESS
+    BEGIN
+        WHILE TRUE LOOP
+            clk <= '0';
+            WAIT FOR clk_period / 2;
+            clk <= '1';
+            WAIT FOR clk_period / 2;
+        END LOOP;
+    END PROCESS clk_process;
+
+    -- Process to manage standby state
+    stby_process : PROCESS
+    BEGIN
+        stby <= '1';
+        WAIT FOR 2 * clk_period; -- Wait for two clock cycles
+        stby <= '0';
+
+        -- Allow time for the state machine to initialize and transition
+        WAIT FOR (timeRG + 2) * clk_period; -- Enough time to cover state RG and transition
+
+        -- Allow more time to observe state transitions
+        WAIT FOR timeMAX * clk_period; -- Enough time to cover all states in normal mode
+
+        -- Finish simulation
+        ASSERT FALSE REPORT "Simulation Ended" SEVERITY NOTE;
+        WAIT;
+    END PROCESS stby_process;
+
+    -- Parallel process to toggle the test signal
+    test_process : PROCESS
+    BEGIN
+        WHILE TRUE LOOP
+            test <= '0';
+            WAIT FOR 2 * clk_period;
+            test <= '1';
+            WAIT FOR 2 * clk_period;
+        END LOOP;
+    END PROCESS test_process;
+
+    -- Counter process
+    counter_process : PROCESS (clk)
+    BEGIN
+        IF rising_edge(clk) THEN
+            count <= count + 1;
+            IF count = 270 THEN
+                count <= 0; -- Reset count if needed
+            END IF;
+        END IF;
+    END PROCESS counter_process;
+
+END ARCHITECTURE tb;
